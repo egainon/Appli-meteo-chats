@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { MeteoData, ChatInfo } from "./types/interface";
 import { getChatMeteo } from "./components/ChatMeteo";
-import { API_KEY } from "./key/key";
 
 function AppMeteoChat() {
+  const API_KEY = "f57f27980f966cee45ff2788c3b6bf4b";
   const [ville, setVille] = useState("");
   const [meteo, setMeteo] = useState<MeteoData | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -11,7 +11,7 @@ function AppMeteoChat() {
   const rechercherMeteo = async () => {
     try {
       const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${ville}&appid=${API_KEY}&units=metric&lang=fr`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${ville}&appid=${API_KEY}&units=metric&lang=fr`
       );
       const data: MeteoData = await res.json();
       if (data.cod !== 200) {
@@ -39,7 +39,7 @@ function AppMeteoChat() {
         <h1 className="text-3xl font-bold text-center mb-6 tracking-wide text-[#5a6b2e]">
           MétéoChat
         </h1>
-
+        
         {/* Recherche */}
         <div className="flex gap-2 mb-6">
           <input
@@ -68,7 +68,7 @@ function AppMeteoChat() {
               {meteo.name} {chat.emoji}
               {meteo.weather[0].description}
             </h2>
-            <p className="text-3xl font-bold text-[#a0502e] mb-2">
+              <p className="text-3xl font-bold text-[#a0502e] mb-2">
               {Math.round(meteo.main.temp)}°C
             </p>
             {/* <p className="text-sm text-[#1a1a1a] mb-3 capitalize">
